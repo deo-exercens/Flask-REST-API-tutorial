@@ -3,9 +3,24 @@ url = "https://pypi.org/simple"
 verify_ssl = true
 name = "pypi"
 
-[packages]
-
 [dev-packages]
+pytest = "*"
+pytest-cov="*"
+alchemy-mock = "*"
+pysnooper = "*"
+mock = "*"
+pylint = "*"
+
+[packages]
+marshmallow="==3.0.0rc7"
+flask-restplus = "*"
+flask-sqlalchemy = "*"
+flask-migrate = "*"
+flask-script = "*"
+enum34="*"
+pymysql = "*"
+python-dotenv = "*"
+flask-dotenv = "*"
 
 [requires]
 python_version = "3.6"

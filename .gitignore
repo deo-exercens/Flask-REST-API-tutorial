@@ -30,3 +30,6 @@ build
 
 # Visual Studio settings
 .vscode
+
+.pytest_cache
+.env
