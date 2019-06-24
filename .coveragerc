@@ -1,0 +1,16 @@
+[run]
+branch=True
+omit = 
+    .venv/*
+    app/tests/*
+    app/repository/http/*
+    app/models/*
+    app/config.py
+    app/constants.py
+    app/exceptions.py
+    */migrations/*
+    confs/*
+    manage.py
+
+[tool:pytest]
+addopts = --cov-report=xml:cov.xml

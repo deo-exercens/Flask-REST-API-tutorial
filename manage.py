@@ -1,14 +1,14 @@
 """
 	Flask Controll script
 """
+import os
+import sys
+
 from flask_script import Manager
 
 from app import create_app
 
-APP = create_app('dev', env_files=[
-    "./app/.env",
-    "./confs/database/mysql/.env"
-])
+APP = create_app(mode=os.getenv("ENV", "dev"))
 
 APP.app_context().push()
 
@@ -25,9 +25,16 @@ def run():
 
 @MANAGER.command
 def test():
-    """ app testing command """
+    """
+    application test code 실행 command
+    $ python manage.py test
+    """
     import pytest
-    return pytest.main(['-vx', 'app/tests'])
+    root_dir = APP.config['ROOT_DIR']
+    test_path = '{ROOT_DIR}/app/tests'.format(ROOT_DIR=root_dir)
+    coverage_option = '--cov-config={ROOT_DIR}/.coveragerc'.format(ROOT_DIR=root_dir)
+    errno = pytest.main([test_path, coverage_option])
+    sys.exit(errno)
 
 if __name__ == '__main__':
     MANAGER.run()

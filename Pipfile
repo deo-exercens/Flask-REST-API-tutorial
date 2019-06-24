@@ -19,7 +19,6 @@ flask-migrate = "*"
 flask-script = "*"
 enum34="*"
 pymysql = "*"
-python-dotenv = "*"
 flask-dotenv = "*"
 
 [requires]
