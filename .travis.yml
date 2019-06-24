@@ -1,5 +1,8 @@
 sudo: required
 
+services:
+  - docker
+
 env:
   - DOCKER_COMPOSE_VERSION=1.24.1
   - COMPOSE_FILE=docker-compose.yml
