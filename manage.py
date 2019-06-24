@@ -7,8 +7,11 @@ import sys
 from flask_script import Manager
 
 from app import create_app
+from app import DB
 
 APP = create_app(mode=os.getenv("ENV", "dev"))
+
+DB.init_app(APP)
 
 APP.app_context().push()
 

@@ -11,7 +11,8 @@ class Config:
     """ Base configurations """
     DEBUG = False
     TESTING = False
-    # SECRET_KEY = os.getenv('SECRET')
+    SQLALCHEMY_TRACK_MODIFICATIONS = False
+
     @classmethod
     def init_app(cls, app: Flask, env_files: List):
         """ .env file load """
@@ -40,14 +41,14 @@ class ProductionConfig(Config):
         Production 설정
         환경변수는 systemd의 Service section에서 EnvironmentFile으로 불러옴
     """
-    ENV="production"
+    ENV = "production"
     DEBUG = False
 
 class DevelopmentConfig(Config):
     """
         Development 설정
     """
-    ENV="development"
+    ENV = "development"
     DEBUG = True
     SQLALCHEMY_ECHO = True
 
@@ -57,7 +58,7 @@ class TestingConfig(Config):
         기본적으로 단위 테스트를 수행
         기능 및 통합 테스트 시 환경변수에 설정이 안되어 있을 경우 에러 발생
     """
-    ENV="testing"
+    ENV = "testing"
     TESTING = True
     DEBUG = True
     SQLALCHEMY_ECHO = True
