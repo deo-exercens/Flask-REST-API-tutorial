@@ -24,12 +24,6 @@ ifndef PIPENV
 	pip install pipenv
 endif
 	@bash -c "echo -e \"${GREEN}pipenv 설치되어 있음${NC}\""
-
-ifndef DIRENV
-	# https://github.com/direnv/direnv
-	$(error "direnv가 설치되어 있지 않습니다.")
-endif
-	@bash -c "echo -e \"${GREEN}direnv 설치되어 있음${NC}\""
 .PHONY: ref
 
 venv_dir=.venv
