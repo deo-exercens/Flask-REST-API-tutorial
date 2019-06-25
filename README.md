@@ -1,4 +1,4 @@
-# Flask REST API Tutorial
+# Flask REST API Tutorial [![Build Status](https://travis-ci.com/deo-exercens/Flask-REST-API-tutorial.svg?branch=master)](https://travis-ci.com/deo-exercens/Flask-REST-API-tutorial)
 
 ## Project Structure
 
