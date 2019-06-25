@@ -14,5 +14,8 @@ env:
 script:
   - docker-compose up -d
   - docker-compose ps
+  - python manage.py db init
+  - python manage.py db migrate
+  - python manage.py db upgrade
   - make fast-pylint
   - make test

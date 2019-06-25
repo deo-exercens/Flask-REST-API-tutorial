@@ -11,7 +11,7 @@ PYLINT = pylint
 # R0903: Too few public method
 PYLINTFLAGS = -rn --disable=W0511,W0621,R0903
 
-PYTHONFILES := $(shell find . -name '*.py' | grep -v .venv)
+PYTHONFILES := $(shell find . -name '*.py' | grep -v .venv | grep -v migrations)
 
 ref:
 ifndef PIP

@@ -1,9 +1,11 @@
+# pylint: disable=W0401, C0413, W0614
 """
 	Flask Controll script
 """
 import os
 import sys
 
+from flask_migrate import Migrate, MigrateCommand
 from flask_script import Manager
 
 from app import create_app
@@ -13,9 +15,15 @@ APP = create_app(mode=os.getenv("ENV", "dev"))
 
 DB.init_app(APP)
 
+from app.models.todo.orm import *
+
 APP.app_context().push()
 
 MANAGER = Manager(APP)
+
+MIGRATE = Migrate(APP, DB)
+
+MANAGER.add_command('db', MigrateCommand)
 
 @MANAGER.command
 def run():

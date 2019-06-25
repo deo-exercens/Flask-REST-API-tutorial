@@ -12,7 +12,6 @@ def flask_app():
     DB.init_app(app)
     return app
 
-
 @pytest.fixture()
 def app_context(flask_app):
     """ test app context """

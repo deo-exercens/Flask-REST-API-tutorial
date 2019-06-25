@@ -10,6 +10,7 @@ alchemy-mock = "*"
 pysnooper = "*"
 mock = "*"
 pylint = "*"
+pylint-flask = "*"
 
 [packages]
 marshmallow="==3.0.0rc7"

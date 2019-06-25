@@ -62,6 +62,7 @@ class TestingConfig(Config):
     TESTING = True
     DEBUG = True
     SQLALCHEMY_ECHO = True
+
 CONFIG_BY_NAME = dict(
     dev=DevelopmentConfig,
     test=TestingConfig,
