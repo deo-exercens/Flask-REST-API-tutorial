@@ -1,24 +1,16 @@
-sudo: required
-
 language: python
-
+services: docker
+sudo: required
 python:
   - '3.6'
-
-install:
-  - 'pip install pipenv'
-
-services:
-  - docker
-
-env:
-  - COMPOSE_FILE=docker-compose.yml
 before_install:
   - sudo apt-get install make
+install:
+  - 'pip install pipenv'
+env:
+  - COMPOSE_FILE=docker-compose.yml
 script:
   - docker-compose up -d
   - docker-compose ps
   - make fast-pylint
   - make test
-
-after_script
