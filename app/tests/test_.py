@@ -9,6 +9,6 @@ import pytest
 # from app import DB
 
 @pytest.mark.unit
-def test_code(flask_app):
+def test_code(test_app):
     """ 테스트 코드 """
     assert True

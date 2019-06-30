@@ -21,7 +21,7 @@ def create_app(mode: str)-> (Flask):
     env_files = CONFIG_FILES_BY_NAME[mode]
     config.init_app(app, env_files=env_files)
     app.config.from_object(config)
-    if 'TRAVIS_CI' not in os.environ:
+    if mode in ['dev', 'test', 'prod']:
         # https://docs.python.org/3/library/logging.config.html#logging-config-dictschema
         dictConfig({
             'version':1,

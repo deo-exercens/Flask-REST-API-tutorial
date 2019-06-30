@@ -7,6 +7,8 @@ import os
 from flask import Flask
 from flask_dotenv import DotEnv
 
+from app.constants import SQLALCHEMY_DATABASE_URI
+
 class Config:
     """ Base configurations """
     DEBUG = False
@@ -63,10 +65,51 @@ class TestingConfig(Config):
     DEBUG = True
     SQLALCHEMY_ECHO = True
 
+class ContinuousIntegrationConfig:
+    """
+        지속적 통합을 위한 설정
+        .env 파일은 SCM에 없으므로
+        환경변수를 이용하여 설정값을 등록하도록 수정
+    """
+    ENV = "ci"
+    TESTING = True
+    DEBUG = True
+    SQLALCHEMY_ECHO = True
+    SQLALCHEMY_TRACK_MODIFICATIONS = False
+
+    # application variable
+    HOST = os.getenv('HOST')
+    PORT = os.getenv('PORT')
+    LOG_PATH = os.getenv('LOG_PATH')
+    SECRET_KEY = os.getenv('SECRET_KEY')
+
+    # database variable
+    MYSQL_DATABASE_USERNAME = os.getenv('MYSQL_DATABASE_USERNAME')
+    MYSQL_ROOT_PASSWORD = os.getenv('MYSQL_ROOT_PASSWORD')
+    MYSQL_DATABASE = os.getenv('MYSQL_DATABASE')
+    MYSQL_DATABASE_HOST = os.getenv('MYSQL_DATABASE_HOST')
+    MYSQL_PORT = os.getenv('MYSQL_PORT')
+
+    SQLALCHEMY_DATABASE_URI.format(
+        USER=MYSQL_DATABASE_USERNAME,
+        PASSWORD=MYSQL_ROOT_PASSWORD,
+        ADDR=MYSQL_DATABASE_HOST,
+        PORT=MYSQL_PORT,
+        NAME=MYSQL_DATABASE,
+    )
+    @classmethod
+    def init_app(cls, app: Flask, env_files: List):
+        """ duck method """
+        config_py_path = os.path.realpath(__file__)
+        app_path = os.path.dirname(config_py_path)
+        project_root_path = os.path.dirname(app_path)
+        cls.ROOT_DIR = project_root_path
+
 CONFIG_BY_NAME = dict(
     dev=DevelopmentConfig,
     test=TestingConfig,
-    prod=ProductionConfig
+    prod=ProductionConfig,
+    ci=ContinuousIntegrationConfig
 )
 
 CONFIG_FILES_BY_NAME = dict(
@@ -77,5 +120,7 @@ CONFIG_FILES_BY_NAME = dict(
     test=[
         "/app/.env",
         "/confs/database/mysql/.env",
-    ]
+    ],
+    prod=[],
+    ci=[]
 )
