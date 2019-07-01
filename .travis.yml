@@ -12,10 +12,12 @@ install:
 env:
   - COMPOSE_FILE=docker-compose.yml
 script:
+  - ln -Tfs docker-compose.ci.yml docker-compose.yml
   - docker-compose up -d
-  - docker-compose ps
-  - python manage.py db init
-  - python manage.py db migrate
-  - python manage.py db upgrade
+  - docker ps -al
+  - pipenv install --dev
+  # - pipenv run python manage.py db init
+  # - pipenv run python manage.py db migrate
+  - pipenv run python manage.py db upgrade
   - make fast-pylint
   - make test

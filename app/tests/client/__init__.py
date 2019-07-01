@@ -7,6 +7,7 @@ from app import DB
 
 @pytest.fixture()
 def config_keys():
+    """ required config """
     app = ('HOST', 'PORT', 'SECRET_KEY', 'LOG_PATH',)
     database = (
         'MYSQL_DATABASE_USERNAME', 'MYSQL_ROOT_PASSWORD', 'MYSQL_DATABASE', 'MYSQL_DATABASE_HOST',
@@ -23,18 +24,21 @@ def test_app():
 
 @pytest.fixture(scope='session')
 def production_app():
+    """ production app """
     app = create_app(mode='prod')
     DB.init_app(app)
     return app
 
 @pytest.fixture(scope='session')
 def development_app():
+    """ development app """
     app = create_app(mode='dev')
     DB.init_app(app)
     return app
 
 @pytest.fixture(scope='session')
 def ci_app():
+    """ ci app """
     app = create_app(mode='ci')
     DB.init_app(app)
     return app

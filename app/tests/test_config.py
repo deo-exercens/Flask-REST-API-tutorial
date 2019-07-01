@@ -1,8 +1,10 @@
+# pylint: disable=C0103
 """
     configuration test
 """
 
 class TestConfig:
+    """ app/config 테스트 """
     @staticmethod
     def test_TestConfig(test_app, config_keys):
         """ TestConfig 테스트 """

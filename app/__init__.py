@@ -17,6 +17,9 @@ DB = SQLAlchemy()
 def create_app(mode: str)-> (Flask):
     """ flask app factory """
     app = Flask(__name__)
+    # CI tool에서 테스트 시
+    mode = 'ci' if os.getenv('ENV') == 'ci' else mode
+
     config = CONFIG_BY_NAME[mode]
     env_files = CONFIG_FILES_BY_NAME[mode]
     config.init_app(app, env_files=env_files)

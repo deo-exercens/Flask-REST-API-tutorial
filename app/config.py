@@ -30,7 +30,7 @@ class Config:
             "MYSQL_PORT": int,
             "PORT": int,
         })
-        app.config['SQLALCHEMY_DATABASE_URI'] = app.config['SQLALCHEMY_DATABASE_URI'].format(
+        app.config['SQLALCHEMY_DATABASE_URI'] = SQLALCHEMY_DATABASE_URI.format(
             USER=app.config['MYSQL_DATABASE_USERNAME'],
             PASSWORD=app.config['MYSQL_ROOT_PASSWORD'],
             ADDR=app.config['MYSQL_DATABASE_HOST'],
@@ -100,6 +100,7 @@ class ContinuousIntegrationConfig:
     @classmethod
     def init_app(cls, app: Flask, env_files: List):
         """ duck method """
+        _ = app, env_files
         config_py_path = os.path.realpath(__file__)
         app_path = os.path.dirname(config_py_path)
         project_root_path = os.path.dirname(app_path)
